@@ -87,10 +87,12 @@ export function useGame() {
     const room = getRoomById(roomId)
     if (!room || room.status !== 'playing') return false
 
+    const unflippedTopics = room.topics.filter(t => !t.isFlipped)
+    if (unflippedTopics.length === 0) return false
+
     isShuffling.value = true
     
-    room.topics.forEach(t => t.isFlipped = false)
-    const shuffledIds = [...room.topics].sort(() => Math.random() - 0.5).map(t => t.id)
+    const shuffledIds = [...unflippedTopics].sort(() => Math.random() - 0.5).map(t => t.id)
     room.shuffledTopics = shuffledIds
     room.currentTurn = 0
     

@@ -79,7 +79,7 @@ const handleEmergency = () => {
 const handleShuffle = () => {
   if (isFlipping.value || isShuffling.value) return
   
-  if (confirm('重新洗牌会重置所有话题，确定吗？')) {
+  if (confirm('重洗只会重排剩余话题，已聊过的不会重复出现，确定吗？')) {
     shuffleCards(roomId.value)
   }
 }
